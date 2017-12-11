@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,13 +70,8 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const create_tree_1 = __webpack_require__(2);
-const to_node_1 = __webpack_require__(12);
-onmessage = function (e) {
-    const nodeList = e.data.annotations.map(to_node_1.default);
-    const tree = create_tree_1.default(e.data, nodeList);
-    postMessage(tree);
-};
+const hasOverlap = (a, b) => !(a.end <= b.start || a.start >= b.end);
+exports.default = hasOverlap;
 
 
 /***/ }),
@@ -145,20 +140,36 @@ exports.default = {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const sort_1 = __webpack_require__(3);
-const split_annotations_1 = __webpack_require__(4);
-const add_row_1 = __webpack_require__(5);
-const to_tree_1 = __webpack_require__(6);
-const fill_gaps_1 = __webpack_require__(7);
-exports.generateNodeId = (a, withSuffix = true) => {
-    const suffix = a.hasOwnProperty('_first') ?
+const create_tree_1 = __webpack_require__(3);
+const to_node_1 = __webpack_require__(14);
+onmessage = function (e) {
+    const nodeList = e.data.annotations.map(to_node_1.default);
+    const tree = create_tree_1.default(e.data, nodeList);
+    postMessage(tree);
+};
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const sort_1 = __webpack_require__(4);
+const split_annotations_1 = __webpack_require__(5);
+const add_row_1 = __webpack_require__(6);
+const to_tree_1 = __webpack_require__(7);
+const fill_gaps_1 = __webpack_require__(8);
+exports.generateNodeId = (node, withSuffix = true) => {
+    const suffix = node.hasOwnProperty('_first') ?
         '_first' :
-        a.hasOwnProperty('_last') ?
+        node.hasOwnProperty('_last') ?
             '_last' :
-            a.hasOwnProperty('_segment') ?
+            node.hasOwnProperty('_segment') ?
                 `_segment_${Math.round(Math.random() * 1000000)}` :
                 '';
-    return withSuffix ? `${a.type}_${a.id}${suffix}` : `${a.type}_${a.id}`;
+    return withSuffix ? `${node.type}_${node._id}${suffix}` : `${node.type}_${node._id}`;
 };
 const addNodeId = (node) => {
     node._nodeId = exports.generateNodeId(node);
@@ -180,7 +191,7 @@ exports.default = createTree;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -221,13 +232,13 @@ exports.byRowStartEnd = (a, b) => {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const has_overlap_1 = __webpack_require__(13);
+const has_overlap_1 = __webpack_require__(0);
 exports.toSplitPoints = (splitPoints, curr, index, arr) => {
     if (index === 0)
         return splitPoints;
@@ -322,13 +333,13 @@ exports.splitAnnotations = () => {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const has_overlap_1 = __webpack_require__(13);
+const has_overlap_1 = __webpack_require__(0);
 const display_by_tag_name_1 = __webpack_require__(1);
 const addRow = () => {
     const rows = [[]];
@@ -365,13 +376,13 @@ exports.default = addRow;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const has_overlap_1 = __webpack_require__(13);
+const has_overlap_1 = __webpack_require__(0);
 const toTree = (agg, curr, index, arr) => {
     if (agg.length === 0) {
         agg.push(curr);
@@ -394,14 +405,14 @@ exports.default = toTree;
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const uuidv4 = __webpack_require__(8);
-const constants_1 = __webpack_require__(14);
+const uuidv4 = __webpack_require__(9);
+const constants_1 = __webpack_require__(13);
 const generateNodeId = (suffix) => `${constants_1.SYSTEM_TEXT_TYPE}_${uuidv4()}_${suffix}`;
 exports.reducer = (parent) => {
     let prevEnd = parent.start;
@@ -456,11 +467,11 @@ exports.default = fillGaps;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var rng = __webpack_require__(9);
-var bytesToUuid = __webpack_require__(11);
+var rng = __webpack_require__(10);
+var bytesToUuid = __webpack_require__(12);
 
 function v4(options, buf, offset) {
   var i = buf && offset || 0;
@@ -491,7 +502,7 @@ module.exports = v4;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {// Unique ID creation requires a high quality random # generator.  In the
@@ -528,10 +539,10 @@ if (!rng) {
 
 module.exports = rng;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 var g;
@@ -558,7 +569,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 /**
@@ -587,7 +598,20 @@ module.exports = bytesToUuid;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.debounceWait = 1000;
+exports.IGNORE_CLASSNAME = '__ignore';
+exports.SYSTEM_TEXT_TYPE = '__text';
+exports.SYSTEM_ROOT_TYPE = '__root';
+
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -600,30 +624,6 @@ const toNode = (annotation) => ({
     type: annotation.type,
 });
 exports.default = toNode;
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const hasOverlap = (a, b) => !(a.end <= b.start || a.start >= b.end);
-exports.default = hasOverlap;
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.debounceWait = 1000;
-exports.IGNORE_CLASSNAME = '__ignore';
-exports.SYSTEM_TEXT_TYPE = '__text';
-exports.SYSTEM_ROOT_TYPE = '__root';
 
 
 /***/ })

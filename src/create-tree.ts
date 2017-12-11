@@ -6,16 +6,16 @@ import fillGaps from "./fill-gaps"
 import { INode } from "./to-node"
 import Annotation from 'pergamon-ui-components/build/models/annotation'
 
-export const generateNodeId = (a, withSuffix: boolean = true) => {
-	const suffix = a.hasOwnProperty('_first') ?
+export const generateNodeId = (node: INode, withSuffix: boolean = true): string => {
+	const suffix = node.hasOwnProperty('_first') ?
 		'_first' :
-		a.hasOwnProperty('_last') ?
+		node.hasOwnProperty('_last') ?
 			'_last' :
-			a.hasOwnProperty('_segment') ?
+			node.hasOwnProperty('_segment') ?
 				`_segment_${Math.round(Math.random() * 1000000)}` :
 				'';
 
-	return withSuffix ? `${a.type}_${a.id}${suffix}` : `${a.type}_${a.id}`;
+	return withSuffix ? `${node.type}_${node._id}${suffix}` : `${node.type}_${node._id}`;
 }
 
 const addNodeId = (node: INode) => {
