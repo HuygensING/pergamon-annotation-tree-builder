@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "build/bundle.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "jest",
+    "watch": "webpack -w"
+  },
   "dependencies": {
     "typescript": "^2.6.2"
   },
@@ -12,11 +17,6 @@
     "jest": "^21.2.1",
     "ts-jest": "^21.2.4",
     "webpack": "^3.10.0"
-  },
-  "scripts": {
-    "build": "webpack",
-    "test": "jest",
-    "watch": "webpack -w"
   },
   "author": "",
   "license": "ISC",
