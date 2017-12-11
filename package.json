@@ -1,0 +1,37 @@
+{
+  "name": "pergamon-annotation-tree-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/bundle.js",
+  "dependencies": {
+    "typescript": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^21.1.8",
+    "awesome-typescript-loader": "^3.4.1",
+    "jest": "^21.2.1",
+    "ts-jest": "^21.2.4",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "test": "jest",
+    "watch": "webpack -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "/__tests__/data/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  }
+}
