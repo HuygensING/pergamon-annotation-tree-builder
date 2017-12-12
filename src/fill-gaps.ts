@@ -1,7 +1,7 @@
 import * as uuidv4 from 'uuid/v4'
-import { SYSTEM_TEXT_TYPE } from 'pergamon-ui-components/build/constants'
-import TreeNode from 'pergamon-ui-components/build/models/tree-node'
+import { TreeNode } from 'pergamon-ui-components'
 
+const SYSTEM_TEXT_TYPE = '__text'
 const generateNodeId = (suffix: string) => `${SYSTEM_TEXT_TYPE}_${uuidv4()}_${suffix}`
 
 // Export for __tests__/fill-gaps.test.ts

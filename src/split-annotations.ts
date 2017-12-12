@@ -1,5 +1,5 @@
 import hasOverlap from "./has-overlap"
-import TreeNode from 'pergamon-ui-components/build/models/tree-node'
+import { TreeNode } from 'pergamon-ui-components'
 
 export const toSplitPoints = (splitPoints, curr, index, arr) => {
 	if (index === 0) return splitPoints;

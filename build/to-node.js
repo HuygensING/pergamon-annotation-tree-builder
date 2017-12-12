@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const tree_node_1 = require("pergamon-ui-components/build/models/tree-node");
-const toNode = (annotation) => new tree_node_1.default({
+const pergamon_ui_components_1 = require("pergamon-ui-components");
+const toNode = (annotation) => new pergamon_ui_components_1.TreeNode({
     annotationId: annotation.id,
     attributes: annotation.attributes,
     end: annotation.end,

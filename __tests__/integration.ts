@@ -1,4 +1,4 @@
-import createTree from '../src/create-tree'
+import createTree from '../src'
 import { Annotation } from 'pergamon-ui-components'
 
 describe('integration', () => {

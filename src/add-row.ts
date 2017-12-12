@@ -1,6 +1,6 @@
 import hasOverlap from "./has-overlap"
 import DisplayByTagName, { Display } from './display-by-tag-name'
-import TreeNode from 'pergamon-ui-components/build/models/tree-node'
+import { TreeNode } from 'pergamon-ui-components'
 
 const addRow = () => {
 	const rows = [[]];

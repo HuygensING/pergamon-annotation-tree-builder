@@ -1,5 +1,4 @@
-import Annotation from 'pergamon-ui-components/build/models/annotation'
-import TreeNode from 'pergamon-ui-components/build/models/tree-node'
+import { Annotation, TreeNode } from 'pergamon-ui-components'
 
 // export interface INode {
 //     _first?: boolean

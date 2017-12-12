@@ -1,5 +1,5 @@
 import hasOverlap from "./has-overlap";
-import TreeNode from 'pergamon-ui-components/build/models/tree-node'
+import { TreeNode } from 'pergamon-ui-components'
 
 const toTree = (agg: TreeNode[], curr: TreeNode, index: number, arr: TreeNode[]) => {
 	if (agg.length === 0) {
