@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "declaration": false,
+    "declaration": true,
     "module": "commonjs",
     "noUnusedLocals": true,
     "outDir": "build",
     "removeComments": true,
-    "target": "es2017"
+    "target": "es6"
   },
   "exclude": ["node_modules", "build"],
   "include": ["src/index.ts"]

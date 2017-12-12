@@ -1,6 +1,7 @@
 import hasOverlap from "./has-overlap";
+import TreeNode from 'pergamon-ui-components/build/models/tree-node'
 
-const toTree = (agg, curr, index, arr) => {
+const toTree = (agg: TreeNode[], curr: TreeNode, index: number, arr: TreeNode[]) => {
 	if (agg.length === 0) {
 		agg.push(curr);
 		return agg;
@@ -11,8 +12,8 @@ const toTree = (agg, curr, index, arr) => {
 	for (let i = prevAnnotations.length - 1; i >= 0; i--) {
 		const prevAnnotation = prevAnnotations[i];
 		if (hasOverlap(curr, prevAnnotation)) {
-			if (!prevAnnotation.hasOwnProperty('annotations')) prevAnnotation.annotations = [];
-			prevAnnotation.annotations.push(curr);
+			if (!prevAnnotation.hasOwnProperty('children')) prevAnnotation.children = [];
+			prevAnnotation.children.push(curr);
 
 			return agg;
 		}

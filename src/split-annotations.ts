@@ -1,5 +1,5 @@
 import hasOverlap from "./has-overlap"
-import Annotation from 'pergamon-ui-components/build/models/annotation'
+import TreeNode from 'pergamon-ui-components/build/models/tree-node'
 
 export const toSplitPoints = (splitPoints, curr, index, arr) => {
 	if (index === 0) return splitPoints;
@@ -19,7 +19,7 @@ export const toSplitPoints = (splitPoints, curr, index, arr) => {
 		.sort((a: number, b: number) => a - b); // Sort numerically
 };
 
-export const splitAnnotation = (annotation: Annotation, splitPoints: number[]) => {
+export const splitAnnotation = (annotation: TreeNode, splitPoints: number[]) => {
 	if (annotation.start !== splitPoints[0]) {
 		splitPoints = [annotation.start].concat(splitPoints);
 	}
@@ -40,13 +40,13 @@ export const splitAnnotation = (annotation: Annotation, splitPoints: number[]) =
 			const part = parts[i];
 
 			if (i === 0) {
-				part._first = true;
+				part.first = true;
 			}
 			else if (i === (parts.length - 1)) {
-				part._last = true;
+				part.last = true;
 			}
 			else {
-				part._segment = true;
+				part.segment = true;
 			}
 		}
 	}

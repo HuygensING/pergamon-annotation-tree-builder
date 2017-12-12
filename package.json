@@ -2,21 +2,19 @@
   "name": "pergamon-annotation-tree-builder",
   "version": "1.0.0",
   "description": "",
-  "main": "build/bundle.js",
+  "main": "build/index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "tsc",
     "test": "jest",
-    "watch": "webpack -w"
+    "watch": "tsc -w"
   },
   "dependencies": {
     "typescript": "^2.6.2"
   },
   "devDependencies": {
     "@types/jest": "^21.1.8",
-    "awesome-typescript-loader": "^3.4.1",
     "jest": "^21.2.1",
-    "ts-jest": "^21.2.4",
-    "webpack": "^3.10.0"
+    "ts-jest": "^21.2.4"
   },
   "author": "",
   "license": "ISC",

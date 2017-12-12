@@ -1,243 +1,212 @@
-import { INode } from '../../src/to-node'
-import defaultNode from './default-node'
+import TreeNode from 'pergamon-ui-components/build/models/tree-node'
+
 // The original data set, but the original persName goes from
 // 23 to 38. If 23 is changed to 2, the persName (an inline el),
 // crosses the two ps (block elements).
 
-export const annotations: INode[] = [
-	{
-		...defaultNode,
+export const annotations: TreeNode[] = [
+	new TreeNode({
 		start: 2,
 		end: 39,
 		type: 'persName',
-	},
-	{
-		...defaultNode,
+	}),
+	new TreeNode({
 		start: 6,
 		end: 30,
 		type: 'p',
-	},
-	{
-		...defaultNode,
+	}),
+	new TreeNode({
 		start: 8,
 		end: 17,
 		type: 'geogName',
-	},
-	{
-		...defaultNode,
+	}),
+	new TreeNode({
 		start: 31,
 		end: 72,
 		type: 'p',
-	},
-	{
-		...defaultNode,
+	}),
+	new TreeNode({
 		start: 34,
 		end: 36,
 		type: 'placeName',
-	}
+	}),
 ];
 
 export const annotationsSorted = [
-	{
-		...defaultNode,
+	new TreeNode({
 		start: 6,
 		end: 30,
 		type: 'p',
-	},
-	{
-		...defaultNode,
+	}),
+	new TreeNode({
 		start: 31,
 		end: 72,
 		type: 'p',
-	},
-	{
-		...defaultNode,
+	}),
+	new TreeNode({
 		start: 2,
 		end: 39,
 		type: 'persName',
-	},
-	{
-		...defaultNode,
+	}),
+	new TreeNode({
 		start: 8,
 		end: 17,
 		type: 'geogName',
-	},
-	{
-		...defaultNode,
+	}),
+	new TreeNode({
 		start: 34,
 		end: 36,
 		type: 'placeName',
-	}
+	})
 ];
 
 export const annotationsWithRow = [
-	{
-		...defaultNode,
+	new TreeNode({
 		start: 6,
 		end: 30,
 		type: 'p',
-		_row: 0,
-	},
-	{
-		...defaultNode,
+		row: 0,
+	}),
+	new TreeNode({
 		start: 31,
 		end: 72,
 		type: 'p',
-		_row: 0,
-	},
-	{
-		...defaultNode,
+		row: 0,
+	}),
+	new TreeNode({
 		start: 2,
 		end: 39,
 		type: 'persName',
-		_row: 1,
-	},
-	{
-		...defaultNode,
+		row: 1,
+	}),
+	new TreeNode({
 		start: 8,
 		end: 17,
 		type: 'geogName',
-		_row: 2,
-	},
-	{
-		...defaultNode,
+		row: 2,
+	}),
+	new TreeNode({
 		start: 34,
 		end: 36,
 		type: 'placeName',
-		_row: 2,
-	}
+		row: 2,
+	})
 ];
 
 export const annotationsSplitted = [
-	{
-		...defaultNode,
+	new TreeNode({
 		start: 6,
 		end: 30,
 		type: 'p',
-		_row: 0,
-	},
-	{
-		...defaultNode,
+		row: 0,
+	}),
+	new TreeNode({
 		start: 31,
 		end: 72,
 		type: 'p',
-		_row: 0,
-	},
-	{
-		...defaultNode,
-		_first: true,
+		row: 0,
+	}),
+	new TreeNode({
+		first: true,
 		start: 2,
 		end: 6,
 		type: 'persName',
-		_row: 1,
-	},
-	{
-		...defaultNode,
-		_segment: true,
+		row: 1,
+	}),
+	new TreeNode({
+		segment: true,
 		start: 6,
 		end: 30,
 		type: 'persName',
-		_row: 1,
-	},
-	{
-		...defaultNode,
-		_segment: true,
+		row: 1,
+	}),
+	new TreeNode({
+		segment: true,
 		start: 30,
 		end: 31,
 		type: 'persName',
-		_row: 1,
-	},
-	{
-		...defaultNode,
-		_last: true,
+		row: 1,
+	}),
+	new TreeNode({
+		last: true,
 		start: 31,
 		end: 39,
 		type: 'persName',
-		_row: 1,
-	},
-	{
-		...defaultNode,
+		row: 1,
+	}),
+	new TreeNode({
 		start: 8,
 		end: 17,
 		type: 'geogName',
-		_row: 2,
-	},
-	{
-		...defaultNode,
+		row: 2,
+	}),
+	new TreeNode({
 		start: 34,
 		end: 36,
 		type: 'placeName',
-		_row: 2,
-	}
+		row: 2,
+	})
 ];
 
 export const tree = [
-	{
-		...defaultNode,
-		_first: true,
+	new TreeNode({
+		first: true,
 		start: 2,
 		end: 6,
 		type: 'persName',
-		_row: 1,
-	},
-	{
-		...defaultNode,
+		row: 1,
+	}),
+	new TreeNode({
 		start: 6,
 		end: 30,
 		type: 'p',
-		_row: 0,
-		annotations: [
-			{
-				...defaultNode,
-				_segment: true,
+		row: 0,
+		children: [
+			new TreeNode({
+				segment: true,
 				start: 6,
 				end: 30,
 				type: 'persName',
-				_row: 1,
-				annotations: [
-					{
-						...defaultNode,
+				row: 1,
+				children: [
+					new TreeNode({
 						start: 8,
 						end: 17,
 						type: 'geogName',
-						_row: 2,
-					},
+						row: 2,
+					}),
 				]
-			},
+			}),
 		]
-	},
-	{
-		...defaultNode,
-		_segment: true,
+	}),
+	new TreeNode({
+		segment: true,
 		start: 30,
 		end: 31,
 		type: 'persName',
-		_row: 1,
-	},
-	{
-		...defaultNode,
+		row: 1,
+	}),
+	new TreeNode({
 		start: 31,
 		end: 72,
 		type: 'p',
-		_row: 0,
-		annotations: [
-			{
-				...defaultNode,
-				_last: true,
+		row: 0,
+		children: [
+			new TreeNode({
+				last: true,
 				start: 31,
 				end: 39,
 				type: 'persName',
-				_row: 1,
-				annotations: [
-					{
-						...defaultNode,
+				row: 1,
+				children: [
+					new TreeNode({
 						start: 34,
 						end: 36,
 						type: 'placeName',
-						_row: 2,
-					}
+						row: 2,
+					})
 				]
-			},
+			}),
 		]
-	},
+	}),
 ]

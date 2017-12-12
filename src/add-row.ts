@@ -1,10 +1,10 @@
 import hasOverlap from "./has-overlap"
 import DisplayByTagName, { Display } from './display-by-tag-name'
-import { INode } from './to-node'
+import TreeNode from 'pergamon-ui-components/build/models/tree-node'
 
 const addRow = () => {
 	const rows = [[]];
-	return (annotation: INode) => {
+	return (annotation: TreeNode) => {
 		const space = [];
 		for (let row = 0; row < rows.length; row++) {
 			const annotationsInRow = rows[row];
@@ -29,7 +29,7 @@ const addRow = () => {
 		} else {
 			rows[rowIndex].push(annotation);
 		}
-		annotation._row = rowIndex;
+		annotation.row = rowIndex;
 
 		return annotation;
 	}

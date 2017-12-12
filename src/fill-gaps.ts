@@ -1,15 +1,14 @@
 import * as uuidv4 from 'uuid/v4'
-import { INode } from './to-node'
-import Annotation from 'pergamon-ui-components/build/models/annotation'
 import { SYSTEM_TEXT_TYPE } from 'pergamon-ui-components/build/constants'
+import TreeNode from 'pergamon-ui-components/build/models/tree-node'
 
 const generateNodeId = (suffix: string) => `${SYSTEM_TEXT_TYPE}_${uuidv4()}_${suffix}`
 
 // Export for __tests__/fill-gaps.test.ts
-export const reducer = (parent) => {
+export const reducer = (parent: TreeNode) => {
 	let prevEnd = parent.start
 
-	return (agg, curr, index, arr) => {
+	return (agg: TreeNode[], curr: TreeNode, index: number, arr: TreeNode[]) => {
 		const prev = agg[agg.length - 1]
 		curr.start = curr.start < parent.start ? parent.start : curr.start
 		curr.end = curr.end > parent.end ? parent.end : curr.end
@@ -17,12 +16,12 @@ export const reducer = (parent) => {
 		// If the first annotation does not start at 0, add a text component
 		// from 0 until the start of the first annotation.
 		if (prev == null && curr.start > parent.start) {
-			agg.push({
+			agg.push(new TreeNode({
 				end: curr.start,
-				_nodeId: generateNodeId('first'),
+				id: generateNodeId('first'),
 				start: parent.start,
 				type: SYSTEM_TEXT_TYPE,
-			})
+			}))
 			prevEnd = curr.start
 		}
 
@@ -32,12 +31,12 @@ export const reducer = (parent) => {
 		if (curr.start > prevEnd) {
 			const start = prevEnd
 			const end = curr.start
-			agg.push({
+			agg.push(new TreeNode({
 				end,
-				_nodeId: generateNodeId('segment'),
+				id: generateNodeId('segment'),
 				start,
 				type: SYSTEM_TEXT_TYPE,
-			})
+			}))
 		}
 
 		// Add current annotation to the aggregate.
@@ -51,26 +50,24 @@ export const reducer = (parent) => {
 		// If the last annotation does not end at the end of the text,
 		// wrap the last chars in a text component.
 		if (index === arr.length - 1 && prevEnd < parent.end) {
-			agg.push({
+			agg.push(new TreeNode({
 				end: parent.end,
-				_nodeId: generateNodeId('last'),
+				id: generateNodeId('last'),
 				start: prevEnd,
 				type: SYSTEM_TEXT_TYPE,
-			})
+			}))
 		}
 
 		return agg
 	}
 }
 
-const fillGaps = (root: Annotation | INode, tree: INode[]): INode[] =>
+const fillGaps = (root: TreeNode, tree: TreeNode[]): TreeNode[] =>
 	tree
 		.reduce(reducer(root), [])
-		.map((subTree: INode) => {
-			if (Array.isArray(subTree)) {
-				return fillGaps(root, subTree)
-			} else if (subTree.hasOwnProperty('annotations')) {
-				subTree.annotations = fillGaps(subTree, subTree.annotations)
+		.map((subTree: TreeNode) => {
+			if (subTree.hasOwnProperty('children')) {
+				subTree.children = fillGaps(subTree, subTree.children)
 			}
 
 			return subTree
